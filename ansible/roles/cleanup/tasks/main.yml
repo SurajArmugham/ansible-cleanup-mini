@@ -1,0 +1,14 @@
+- name: Copy cleanup script to /tmp
+  copy:
+    src: cleanup.sh
+    dest: /tmp/cleanup.sh
+    mode: '0755'
+
+- name: Run cleanup script
+  command: /tmp/cleanup.sh {{ target_dir }} {{ days }}
+  register: cleanup_output
+  changed_when: cleanup_output.rc == 0
+
+- name: Show cleanup output
+  debug:
+    var: cleanup_output.stdout_lines

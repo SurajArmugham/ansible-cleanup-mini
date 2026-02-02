@@ -1,0 +1,8 @@
+- name: Step 2 - Ansible basics check on localhost
+  hosts: local
+  gather_facts: false
+
+  tasks:
+    - name: Say hello
+      debug:
+        msg: "Hello from Ansible on {{ inventory_hostname }}"

@@ -1,0 +1,10 @@
+- name: Step 3 - Run cleanup using Ansible
+  hosts: local
+  gather_facts: false
+
+  vars:
+    target_dir: "{{ lookup('env','HOME') }}/ansible-cleanup-mini/target_dir"
+    days: 6
+
+  roles:
+    - cleanup

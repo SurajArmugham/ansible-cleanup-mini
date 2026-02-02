@@ -1,0 +1,17 @@
+# test data
+target_dir/
+
+# ansible cache + temp
+*.retry
+.ansible/
+ansible.log
+
+# macOS
+.DS_Store
+
+# editor
+.vscode/
+.idea/
+
+# python cache (sometimes appears)
+__pycache__/
