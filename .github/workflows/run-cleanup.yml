@@ -1,0 +1,25 @@
+name: Run Cleanup on Mac
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  cleanup:
+    runs-on: [self-hosted, mac, cleanup]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show machine info
+        run: |
+          whoami
+          pwd
+          ansible --version
+
+      - name: Run Ansible cleanup
+        run: |
+          cd ansible
+          ansible-playbook -i inventory/hosts.ini playbooks/cleanup.yml
