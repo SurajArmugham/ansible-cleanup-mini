@@ -1,0 +1,27 @@
+name: Ansible CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ansible-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ansible
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install ansible
+
+      - name: Check Ansible version
+        run: ansible --version
+
+      - name: Syntax check playbooks
+        run: |
+          cd ansible
+          ansible-playbook --syntax-check -i inventory/hosts.ini playbooks/ping.yml
+          ansible-playbook --syntax-check -i inventory/hosts.ini playbooks/cleanup.yml
